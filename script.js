@@ -1,15 +1,14 @@
-const canvas = document.getElementById("spaceParticles");
+const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-window.addEventListener("resize", () => {
+function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-});
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
-const particles = Array.from({ length: 120 }, () => ({
+const particles = Array.from({ length: 100 }, () => ({
   x: Math.random() * canvas.width,
   y: Math.random() * canvas.height,
   radius: Math.random() * 2 + 1,
@@ -29,7 +28,6 @@ function animate() {
     p.x += p.dx;
     p.y += p.dy;
 
-    // rebond sur les bords
     if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
     if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
   });
