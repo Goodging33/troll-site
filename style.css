@@ -27,4 +27,7 @@ body {
 .troll-image {
   max-width: 300px;
   margin-bottom: 20px;
+  z-index: 1;
+  position: relative;
 }
+
