@@ -1,5 +1,4 @@
-console.log("Bienvenue sur le site troll !");
-const canvas = document.getElementById("particles");
+const canvas = document.getElementById("spaceParticles");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
@@ -10,21 +9,18 @@ window.addEventListener("resize", () => {
   canvas.height = window.innerHeight;
 });
 
-const particles = [];
+const particles = Array.from({ length: 120 }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  radius: Math.random() * 2 + 1,
+  dx: (Math.random() - 0.5) * 0.3,
+  dy: (Math.random() - 0.5) * 0.3
+}));
 
-for (let i = 0; i < 100; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 2 + 1,
-    dx: (Math.random() - 0.5) * 0.5,
-    dy: (Math.random() - 0.5) * 0.5
-  });
-}
-
-function draw() {
+function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "white";
+
   particles.forEach(p => {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -38,7 +34,7 @@ function draw() {
     if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
   });
 
-  requestAnimationFrame(draw);
+  requestAnimationFrame(animate);
 }
 
-draw();
+animate();
